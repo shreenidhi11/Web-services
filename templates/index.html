@@ -15,7 +15,7 @@
     <div class="container mt-5 pt-5">
       <div class="row">
         <div class="col-12 col-sm-8 col-md-6 m-auto">
-          <h2 class="text-center fw-light">Enter Genre</h2>
+          <h2 class="text-center fw-light">Welcome to GenreGlobe</h2>
           <div class="card border-dark mb-3" style="background-color: #8594e4">
             <div class="card-body">
               <form action="/book" class="row">
@@ -24,14 +24,14 @@
                   name="genre"
                   class="col-8 col-sm-8 col-md-4 m-auto"
                   style="
-                  border: 1px solid black;
-                  /* border: none; */
-                  /* outline: none; */
-                  background: transparent;
-                  color: black !important;
-                  padding: 8px;
-                  border-radius: 6px;
-                "
+                    border: 1px solid black;
+                    /* border: none; */
+                    /* outline: none; */
+                    background: transparent;
+                    color: black !important;
+                    padding: 8px;
+                    border-radius: 6px;
+                  "
                 >
                   {% for genre in genres %}
                   <option value="{{ genre }}">{{ genre }}</option>
@@ -49,5 +49,7 @@
         </div>
       </div>
     </div>
+
+
   </body>
 </html>

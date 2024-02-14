@@ -7,6 +7,7 @@
 from flask import Flask, render_template, request
 from waitress import serve
 from book import get_book_author_details
+from randombook import get_random_book_author_details
 
 # Initializing the Flask instance
 app = Flask(__name__)
@@ -25,6 +26,25 @@ def index():
               "Romance", "Thriller", "Historical Fiction"]
     return render_template('index.html', genres=genres)
     # return render_template('index.html')
+
+@app.route("/randomBook")
+def get_random_book():
+    """
+    Desc: Renders the page for random book 
+    return: returns the template for random book 
+    """
+
+    get_random_details = get_random_book_author_details()
+        # store the details
+    genre = ["Fantasy", "Science Fiction", "Mystery",
+              "Romance", "Thriller", "Historical Fiction"]
+    return render_template("randomBook.html", author_name=get_random_details[0],
+                           book_title=get_random_details[1],
+                           book_page_or_price=get_random_details[2],
+                           top_work=get_random_details[3],
+                           genres = genre
+                          )
+
 
 
 # Endpoint for displaying details
