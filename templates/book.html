@@ -4,48 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book</title>
+    <!-- link to the bootstrap file for this html document -->
     <link
       href="{{ url_for('static',filename='bootstrap.min.css') }}"
       rel="stylesheet"
     />
   </head>
   <body style="background-color: #d5def5">
+    <!-- Section to enter genre  -->
     <div class="container mt-5 pt-5">
       <div class="row">
         <div class="col-12 col-sm-8 col-md-6 m-auto">
+          <!-- condition for checking whether to display default book details -->
           {% if not flag %}
           <h2 class="text-center fw-light">Enter Genre</h2>
           {% else %}
           <h2 class="text-center fw-light">
-            Enter Genre: Displaying Default Author and Book details
+            Enter Genre: Displaying details for default genre
           </h2>
           {% endif %}
           <div class="card border-dark mb-3" style="background-color: #8594e4">
             <div class="card-body">
-              <!-- {% if not flag %}
-              <h3 class="text-center fw-light fs-5">Enter Genre</h3>
-              {% else %}
-              <h3 class="text-center fw-light fs-5">
-                Enter Genre: Displaying Default Author and Book details
-              </h3>
-              {% endif %} -->
               <form action="/book" class="row">
-                <input
-                  class="col-8 col-sm-8 col-md-4 m-auto"
-                  type="text"
-                  name="genre"
+                <select
                   id="genre"
-                  class="form-control"
-                  placeholder="Enter your genre"
+                  name="genre"
+                  class="col-8 col-sm-8 col-md-4 m-auto"
                   style="
-                    border: none;
-                    outline: none;
+                    border: 1px solid black;
+                    /* border: none; */
+                    /* outline: none; */
                     background: transparent;
                     color: black !important;
                     padding: 8px;
                     border-radius: 6px;
                   "
-                />
+                >
+                  {% for genre in genres %}
+                  <option value="{{ genre }}">{{ genre }}</option>
+                  {% endfor %}
+                </select>
                 <button
                   class="btn btn-outline-dark col-4 col-sm-8 col-md-4 m-auto"
                   type="submit"
@@ -59,10 +57,11 @@
       </div>
     </div>
 
+    <!-- Section to display details -->
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-12 col-sm-8 col-md-6 m-auto">
+          <div class="col-12 col-md-6 m-auto">
             <div
               class="card border-dark mb-3"
               style="background-color: #8594e4"
@@ -76,6 +75,7 @@
                   Title: {{ book_title }}
                 </h4>
                 <h4 class="text-center fw-light fs-5">
+                  <!-- condition to display price or page count for the book -->
                   {% if "dollar" in book_page_or_price %} Price: {{
                   book_page_or_price }} {% else %} Page count: {{
                   book_page_or_price }} {% endif %}
