@@ -11,7 +11,8 @@ from randombook import get_random_book_author_details
 
 # Initializing the Flask instance
 app = Flask(__name__)
-
+genres = ["Fantasy", "Science Fiction", "Mystery",
+          "Romance", "Thriller", "Historical Fiction"]
 # Endpoint for Landing Page
 
 
@@ -22,10 +23,19 @@ def index():
     Desc: Renders the home page
     return: returns the template for home page
     """
-    genres = ["Fantasy", "Science Fiction", "Mystery",
-              "Romance", "Thriller", "Historical Fiction"]
+    # genres = ["Fantasy", "Science Fiction", "Mystery",
+    #           "Romance", "Thriller", "Historical Fiction"]
     return render_template('index.html', genres=genres)
     # return render_template('index.html')
+
+
+@app.route("/addGenre")
+def add_genre():
+    new_genre = request.args.get('genre')
+    genres.append(new_genre)
+
+    return render_template("addGenre.html")
+
 
 @app.route("/randomBook")
 def get_random_book():
@@ -35,16 +45,15 @@ def get_random_book():
     """
 
     get_random_details = get_random_book_author_details()
-        # store the details
-    genre = ["Fantasy", "Science Fiction", "Mystery",
-              "Romance", "Thriller", "Historical Fiction"]
+    # store the details
+    # genre = ["Fantasy", "Science Fiction", "Mystery",
+    #          "Romance", "Thriller", "Historical Fiction"]
     return render_template("randomBook.html", author_name=get_random_details[0],
                            book_title=get_random_details[1],
                            book_page_or_price=get_random_details[2],
                            top_work=get_random_details[3],
-                           genres = genre
-                          )
-
+                           genres=genres
+                           )
 
 
 # Endpoint for displaying details
@@ -75,8 +84,8 @@ def get_details():
     book_page_or_price = details[2]
     top_work = details[3]
     image = "https://covers.openlibrary.org/a/olid/"+details[4]
-    genres = ["Fantasy", "Science Fiction", "Mystery",
-              "Romance", "Thriller", "Historical Fiction"]
+    # genres = ["Fantasy", "Science Fiction", "Mystery",
+    #           "Romance", "Thriller", "Historical Fiction"]
 
     return render_template("book.html", flag=defaultflag, author_name=details[0],
                            book_title=details[1],
