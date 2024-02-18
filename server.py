@@ -13,6 +13,9 @@ from randombook import get_random_book_author_details
 app = Flask(__name__)
 genres = ["Fantasy", "Science Fiction", "Mystery",
           "Romance", "Thriller", "Historical Fiction"]
+
+history = []
+
 # Endpoint for Landing Page
 
 
@@ -31,10 +34,19 @@ def index():
 
 @app.route("/addGenre")
 def add_genre():
-    new_genre = request.args.get('genre')
-    genres.append(new_genre)
 
+    new_genre = request.args.get('genre')
+    # check 
+    if new_genre:
+        genres.append(new_genre)
+        history.append(new_genre)
+        
     return render_template("addGenre.html")
+
+
+@app.route("/viewHistory")
+def get_history():
+    return render_template("viewHistory.html", history=history)
 
 
 @app.route("/randomBook")
@@ -45,6 +57,7 @@ def get_random_book():
     """
 
     get_random_details = get_random_book_author_details()
+    history.append(get_random_details[5])
     # store the details
     # genre = ["Fantasy", "Science Fiction", "Mystery",
     #          "Romance", "Thriller", "Historical Fiction"]
@@ -69,6 +82,7 @@ def get_details():
 
     # Fetch the genre from URL
     genre = request.args.get('genre')
+    history.append(genre)
 
     # Handling default genre as python
     if not bool(genre.strip()):

@@ -100,7 +100,7 @@ def get_random_book_author_details():
 
 
     #  return the first author, title of the book, page count or price of the book and top work of the first author
-    return author[0], title, resultamount if not flag else resultPageCount, resultauthor['docs'][0]['top_work'], resultauthor['docs'][0]['key']+"-M.jpg"
+    return author[0], title, resultamount if not flag else resultPageCount, resultauthor['docs'][0]['top_work'], resultauthor['docs'][0]['key']+"-M.jpg",genre
 
 
 if __name__ == "__main__":
