@@ -13,7 +13,6 @@ import os
 from zeep import Client
 import random
 
-
 # Loads the env variables
 load_dotenv()
 
@@ -91,7 +90,6 @@ def get_random_book_author_details():
     authorData = requests.get(
         "https://openlibrary.org/search/authors.json?q={}".format(author[0]))
     resultauthor = authorData.json()
-
     pp(resultauthor['docs'][0]['key']+"-M.jpg")
 
     #  return the first author, title of the book, page count or price of the book and top work of the first author
