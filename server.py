@@ -17,8 +17,6 @@ genres = ["Fantasy", "Science Fiction", "Mystery",
 history = []
 
 # Endpoint for Landing Page
-
-
 @app.route("/")
 @app.route("/index")
 def index():
@@ -26,21 +24,15 @@ def index():
     Desc: Renders the home page
     return: returns the template for home page
     """
-    # genres = ["Fantasy", "Science Fiction", "Mystery",
-    #           "Romance", "Thriller", "Historical Fiction"]
     return render_template('index.html', genres=genres)
-    # return render_template('index.html')
-
-
+          
 @app.route("/addGenre")
 def add_genre():
-
     new_genre = request.args.get('genre')
-    # check 
+    # check if genre is empty
     if new_genre:
         genres.append(new_genre)
-        history.append(new_genre)
-        
+        history.append(new_genre)     
     return render_template("addGenre.html")
 
 
@@ -55,19 +47,14 @@ def get_random_book():
     Desc: Renders the page for random book 
     return: returns the template for random book 
     """
-
     get_random_details = get_random_book_author_details()
     history.append(get_random_details[5])
-    # store the details
-    # genre = ["Fantasy", "Science Fiction", "Mystery",
-    #          "Romance", "Thriller", "Historical Fiction"]
     return render_template("randomBook.html", author_name=get_random_details[0],
                            book_title=get_random_details[1],
                            book_page_or_price=get_random_details[2],
                            top_work=get_random_details[3],
                            genres=genres
                            )
-
 
 # Endpoint for displaying details
 @app.route("/book")
@@ -76,14 +63,11 @@ def get_details():
     Desc: Renders the book details page
     return: returns the template for book details page
     """
-
     # Flag for deciding whether to display page count or price of book
     defaultflag = False
-
     # Fetch the genre from URL
     genre = request.args.get('genre')
     history.append(genre)
-
     # Handling default genre as python
     if not bool(genre.strip()):
         defaultflag = True
@@ -91,16 +75,12 @@ def get_details():
 
     # Call to the main function from book.py that interacts with API
     details = get_book_author_details(genre)
-
     # store the details
     author_name = details[0]
     book_title = details[1]
     book_page_or_price = details[2]
     top_work = details[3]
     image = "https://covers.openlibrary.org/a/olid/"+details[4]
-    # genres = ["Fantasy", "Science Fiction", "Mystery",
-    #           "Romance", "Thriller", "Historical Fiction"]
-
     return render_template("book.html", flag=defaultflag, author_name=details[0],
                            book_title=details[1],
                            book_page_or_price=details[2],
