@@ -18,7 +18,6 @@ import random
 load_dotenv()
 
 def generate_genre_list(num_genres=10):
-
     genres = [
         "Action",
         "Adventure",
@@ -46,15 +45,12 @@ def generate_genre_list(num_genres=10):
     random.shuffle(genres)
     return random.choice(genres)
 
-
-
 def get_random_book_author_details():
     """
     Description: Fetch data related to entered genre such as author name,
     book title, price, page count and topwork
     return: author name, book title, price or page count of book and topwork of author
     """
-
     flag = False
     genre = generate_genre_list()
     print(genre)
@@ -98,16 +94,11 @@ def get_random_book_author_details():
 
     pp(resultauthor['docs'][0]['key']+"-M.jpg")
 
-
     #  return the first author, title of the book, page count or price of the book and top work of the first author
     return author[0], title, resultamount if not flag else resultPageCount, resultauthor['docs'][0]['top_work'], resultauthor['docs'][0]['key']+"-M.jpg",genre
 
 
 if __name__ == "__main__":
-    # Logging for backend server
-    # Check for empty strings or string with only spaces
-
-
     # Get the details
     book_data = get_random_book_author_details()
     print("\n")
