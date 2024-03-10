@@ -13,7 +13,6 @@ import os
 from zeep import Client
 import random
 
-
 # Loads the env variables
 load_dotenv()
 
@@ -23,15 +22,7 @@ def add_genre_to_list(user_input):
     genre.append(user_input)
     return genre
 
-
-
-
-
-
 if __name__ == "__main__":
-    # Logging for backend server
-    # Check for empty strings or string with only spaces
-
     user_input = input()
     print(user_input)
 
